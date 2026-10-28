@@ -487,7 +487,7 @@ class TSC_KSampler:
                 if scheduler_name.startswith("AYS"):
                     return AlignYourStepsScheduler().get_sigmas(scheduler_name.split(" ")[1], steps, denoise=1.0)[0]
                 elif scheduler_name == "GITS":
-                    return GITSScheduler().get_sigmas(1.20, steps, denoise=1.0)[0]
+                    return GITSScheduler().execute(1.20, steps, denoise=1.0)[0]
                 return original_calculation(model_sampling, scheduler_name, steps)
 
             comfy.samplers.KSampler.SCHEDULERS = SCHEDULERS
@@ -2353,7 +2353,7 @@ class TSC_XYplot:
                     "XY_flip": (["False","True"],),
                     "Y_label_orientation": (["Horizontal", "Vertical"],),
                     "cache_models": (["True", "False"],),
-                    "ksampler_output_image": (["Images","Plot"],),},
+                    "ksampler_output_image": (["Images","Plot"], {"default": "Plot"}),},
                 "optional": {
                     "dependencies": ("DEPENDENCIES", ),
                     "X": ("XY", ),
